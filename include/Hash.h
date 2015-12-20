@@ -27,7 +27,7 @@ class Hash
                 return ;
         h[++top].x =  x; h[top].adj = y; h[top].next = r[tx]; r[tx] = top;
     }
-    int find (int x)
+    int operator [] (int x)
     {
         int tx = abs (x) % Mod;
         for (int p = r[tx]; ~p; p = h[p].next)
