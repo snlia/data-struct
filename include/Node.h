@@ -1,22 +1,25 @@
-#ifndef __NODE_H__
-#define __NODE_H__
+#pragma once
 #include "Hash.h"
+
 
 class Node
 {
-    const double EARTH_RADIUS = 6378.137;
-    const double PI = 3.1415926535898;
+    const static double EARTH_RADIUS;
+    const static double PI;
     double rad (double );
     double sqr (double );
     public :
-	int Id;
+    int Id;
+    double lat, lon;
     bool tag;
-	double lat, lon;
     double dis (int);
     double dis (double , double);
+    Node () {}
+    Node (int Id_, double lat_, double lon_, bool tag_) {Id = Id_; lat = lat_; lon = lon_; tag = tag_;}
 };
 
-extern Node* node;
+extern Node node [10];
 extern Hash map_node; 
+extern int tot_node;
 
-#endif
+void add_node (int , double , double , bool );

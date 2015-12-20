@@ -1,5 +1,2 @@
-#ifndef __WAY_H__
-#define __WAY_H__
+#pragma once
 #include "Hash.h"
-
-#endif

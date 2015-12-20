@@ -1,5 +1,4 @@
-#ifndef __TREE_H__
-#define __TREE_H__
+#pragma once
 #include "common.h"
 #include "Node.h"
 
@@ -33,7 +32,7 @@ class Tree
         root = 0;
         min_lat = Min_lat; min_lon = Min_lon; max_lat = Max_lat; max_lon = Max_lon;
     }
-    int Find (double, double)
+    int Find (double, double);
     void Insert (int Id);
     ~Tree ()
     {
@@ -41,4 +40,3 @@ class Tree
     }
 };
 
-#endif
