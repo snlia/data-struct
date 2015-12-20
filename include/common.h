@@ -8,3 +8,4 @@
 #include <queue>
 #include <new>
 #include <cmath>
+const double eps = 1e-6;
