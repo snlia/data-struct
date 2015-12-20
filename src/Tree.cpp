@@ -1,6 +1,5 @@
 #include "common.h"
 #include "Tree.h"
-#include "node.h"
 
 int Tree :: new_point ()
 {

@@ -1,3 +1,5 @@
+#ifndef __NODE_H__
+#define __NODE_H__
 #include "Hash.h"
 
 class Node
@@ -14,5 +16,7 @@ class Node
     double dis (double , double);
 };
 
-Node* node;
-Hash map_node (600000, 1000007);
+extern Node* node;
+extern Hash map_node; 
+
+#endif

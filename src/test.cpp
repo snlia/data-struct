@@ -1,15 +1,11 @@
 #include "Hash.h"
+#include "Node.h"
+#include "Tree.h"
 #include <cstdio>
 
 int main ()
 {
-    Hash T (100, 100);
-    while (1)
-    {
-        int x, tp;
-        scanf ("%d", &tp);
-        if (tp) {scanf ("%d", &x); printf ("%d\n", T[x]);}
-        else {scanf ("%d%d", &x, &tp); T.insert (x, tp);}
-    }
+    node = new Node [10];
+    node[0].tag = 1;
     return 0;
 }

@@ -1,4 +1,7 @@
+#ifndef __TREE_H__
+#define __TREE_H__
 #include "common.h"
+#include "Node.h"
 
 class Tree
 {
@@ -37,3 +40,5 @@ class Tree
         delete (T);
     }
 };
+
+#endif

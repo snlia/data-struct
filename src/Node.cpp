@@ -1,5 +1,7 @@
 #include "common.h"
-#include "node.h"
+#include "Node.h"
+Hash map_node (600000, 1000007);
+Node* node;
 double Node :: rad (double d) { return d * PI / 180.0;}
 
 double Node :: sqr (double d) {return d * d;}
