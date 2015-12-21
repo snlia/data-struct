@@ -39,7 +39,7 @@ class Hash
     }
     ~Hash ()
     {
-        delete (r);
-        delete (h);
+        delete [] r;
+        delete [] h;
     }
 };

@@ -18,7 +18,7 @@ class Node
     Node (int Id_, double lat_, double lon_, bool tag_) {Id = Id_; lat = lat_; lon = lon_; tag = tag_;}
 };
 
-extern Node node [10];
+extern Node* node; 
 extern Hash map_node; 
 extern int tot_node;
 

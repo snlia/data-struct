@@ -8,4 +8,5 @@
 #include <queue>
 #include <new>
 #include <cmath>
-#define eps 1e-6
+#define eps 1e-8
+typedef long long ll;

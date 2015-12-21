@@ -4,7 +4,7 @@
 
 class Tree
 {
-    const int MOD = 100000007;
+    const static int MOD;
     struct tree
     {
         int c [4];
@@ -23,7 +23,7 @@ class Tree
     double min_lat, max_lat, min_lon, max_lon;
     public :
     Tree () {};
-    Tree (int maxn, int Min_lat, int Min_lon, int Max_lat, int Max_lon)
+    Tree (int maxn, double Min_lat, double Min_lon, double Max_lat, double Max_lon)
     {
         top = -1;
         T = new tree [maxn];
@@ -36,7 +36,8 @@ class Tree
     void Insert (int Id);
     ~Tree ()
     {
-        delete (T);
+        delete [] T;
+        delete [] q;
     }
 };
 

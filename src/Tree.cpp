@@ -1,10 +1,11 @@
 #include "common.h"
 #include "Tree.h"
-
+ 
+const int Tree :: MOD = 100000007;
 int Tree :: new_point ()
 {
     ++top;
-    T[top].c[top] = T[top].c[1] = T[top].c[2] = T[top].c[3] = T[top].adj = T[top].cnt = 0;
+    T[top].c[0] = T[top].c[1] = T[top].c[2] = T[top].c[3] = T[top].adj = T[top].cnt = 0;
     return top;
 }
 
@@ -14,6 +15,7 @@ void Tree :: push (int x, double la, double ra, double lo, double ro)
     {
         double lat = node[map_node[T[x].adj]].lat, lon = node[map_node[T[x].adj]].lon;
         double ma = (la + ra) / 2.0, mo = (lo + ro) / 2.0;
+        printf ("%.8lf %.8lf\n", la, ra);
         int tp = (lat < ma - eps) * 2 + (lon < mo - eps);
         tp = T[x].c[tp] = new_point ();
         T[tp].cnt = 1; T[tp].adj = T[x].adj;
@@ -36,6 +38,7 @@ void Tree :: Insert (int Id)
             break;
         }
         double ma = (la + ra) / 2.0, mo = (lo + ro) / 2.0;
+        printf ("%.8lf %.8lf\n", la, ra);
         int tp = (lat < ma - eps) * 2 + (lon < mo - eps);
         tx = &T[*tx].c[tp];
         if (tp & 1) ro = mo; else lo = mo;
@@ -51,7 +54,8 @@ int Tree :: Find (double lat, double lon)
     {
         if (T[x].adj)
         {
-            if (!ans || node[map_node[ans]].dis (lat, lon) > node[map_node[T[x].adj]].dis (lat, lon))
+            double Lat = node[map_node[T[x].adj]].lat, Lon = node[map_node[T[x].adj]].lon;
+            if ((Lat < xra && Lat > xla && Lon < xro && Lon > xlo) && (!ans || node[map_node[ans]].dis (lat, lon) > node[map_node[T[x].adj]].dis (lat, lon)))
                 ans = T[x].adj;
             continue;
         }
