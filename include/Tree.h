@@ -26,7 +26,7 @@ class Tree
     Tree (int maxn, double Min_lat, double Min_lon, double Max_lat, double Max_lon)
     {
         top = -1;
-        T = new tree [maxn];
+        T = new tree [maxn * 30];
         q = new data [maxn];
         new_point ();
         root = 0;
