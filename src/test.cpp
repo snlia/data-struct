@@ -8,11 +8,26 @@ double a [600000];
 int main ()
 {
     freopen ("test.in", "r", stdin);
-//    freopen ("test.out", "w", stdout);
+    freopen ("test.out", "w", stdout);
+    
     ll Id;
     double lat, lon;
     node = new Node [600000];
+    add_node (0, 0, 0, 0);
     char tp [10];
+    /*
+    int tot = 0;
+    while (~scanf ("%s", tp))
+    {
+        if (tp[0] == 'N') 
+        {
+            scanf ("%lld%lf%lf", &Id, &lat, &lon);
+            a[tot++] = lon;
+        }
+    }
+    std :: sort (a, a + tot);
+    for (int i = 0; i <= tot / 500; ++i)
+        printf ("%.7lf\n", a[i * 500]);*/
     while (~scanf ("%s", tp))
     {
         if (tp[0] == 'N')

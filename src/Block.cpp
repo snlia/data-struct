@@ -7,7 +7,8 @@ void blk :: insert (ll Id)
     while (l != r) {int m = (l + r + 1) >> 1; if (lon >= Par[m]) l = m; else r = m - 1;}
     ll lat = node[map_node[Id]].lat;
     Block *p = T + l;
-        for (; p->next != NULL && p->next->lx >= lat; p = p->next);
+    printf ("%d\n", l);
+    for (; p->next != NULL && p->next->lx >= lat; p = p->next);
     p->push (Id);
 }
 
@@ -54,7 +55,11 @@ bool Block :: cmp (ll Id_a, ll Id_b)
 void Block :: push (ll Id)
 {
     adj.push_back (Id);
-    std :: sort (adj.begin (), adj.end (), cmp);
+    int poi = 0;
+    for (; cmp (adj[poi], Id); ++poi);
+    for (int i = poi + 1; i < (int) adj.size (); ++i)
+        adj[i] = adj[i - 1];
+    adj[poi] = Id;
     if (adj.size () > MAX_SIZE)
     {
         Block *p = new Block;
@@ -66,10 +71,13 @@ void Block :: push (ll Id)
         p->next = next;
         next = p;
     }
+    lx = node[map_node[adj[0]]].lat;
+    rx = node[map_node[*adj.rbegin ()]].lat;
 }
 
 ll Block :: check (double lat, double lon)
 {
+    if (!adj.size ()) return 0;
     ll ans = adj[0];
     for (int i = 1; i < (int) adj.size (); ++i)
         if (node[map_node[adj[i]]].dis (lat, lon) < node[map_node[ans]].dis (lat, lon))
