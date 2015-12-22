@@ -40,9 +40,10 @@ int main ()
         {
             scanf ("%lf%lf", &lat, &lon);
             ll ans = blk :: find (lat, lon);
-            if (ans)
+/*            if (ans)
                 printf ("%.8lf\n", node[map_node[ans]].dis (lat, lon));
-            else puts ("0");
+            else puts ("0");*/
+            printf ("%lld\n", ans);
         }
     }
     return 0;

@@ -7,7 +7,6 @@ void blk :: insert (ll Id)
     while (l != r) {int m = (l + r + 1) >> 1; if (lon >= Par[m]) l = m; else r = m - 1;}
     ll lat = node[map_node[Id]].lat;
     Block *p = T + l;
-    printf ("%d\n", l);
     for (; p->next != NULL && p->next->lx >= lat; p = p->next);
     p->push (Id);
 }
