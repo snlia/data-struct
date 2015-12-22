@@ -5,14 +5,16 @@ class Hash
 {
     struct data
     {
-        int x, adj, next;
+        int adj, next;
+        ll x;
     };
-    int Mod, Maxn, top;
+    ll Mod;
+    int Maxn, top;
     int *r;
     data *h;
     public :
     Hash () {};
-    Hash (int Maxn_, int Mod_) 
+    Hash (int Maxn_, ll Mod_) 
     {
         Mod = Mod_;
         Maxn = Maxn_;
@@ -21,17 +23,17 @@ class Hash
         h = new data [Maxn];
         memset (r, 255, sizeof (int) * Mod);
     }
-    void insert (int x, int y)
+    void insert (ll x, int y)
     {
-        int tx = abs (x) % Mod;
+        ll tx = x % Mod;
         for (int p = r[tx]; ~p; p = h[p].next)
             if (h[p].x == x)
                 return ;
         h[++top].x =  x; h[top].adj = y; h[top].next = r[tx]; r[tx] = top;
     }
-    int operator [] (int x)
+    int operator [] (ll x)
     {
-        int tx = abs (x) % Mod;
+        ll tx = x % Mod;
         for (int p = r[tx]; ~p; p = h[p].next)
             if (h[p].x == x)
                 return h[p].adj;

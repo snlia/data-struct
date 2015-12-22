@@ -9,17 +9,16 @@ class Node
     double rad (double );
     double sqr (double );
     public :
-    int Id;
-    double lat, lon;
+    ll lat, lon, Id;
     bool tag;
     double dis (int);
     double dis (double , double);
     Node () {}
-    Node (int Id_, double lat_, double lon_, bool tag_) {Id = Id_; lat = lat_; lon = lon_; tag = tag_;}
+    Node (ll Id_, double lat_, double lon_, bool tag_) {Id = Id_; lat = (ll) (lat_ * ext); lon = (ll) (lon_ * ext); tag = tag_;}
 };
 
 extern Node* node; 
 extern Hash map_node; 
 extern int tot_node;
 
-void add_node (int , double , double , bool );
+void add_node (ll , double , double , bool );
