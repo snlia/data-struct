@@ -3,7 +3,7 @@
 
 typedef long long ll;
 
-double a [600000];
+ll a [600000];
 
 int main ()
 {
@@ -22,12 +22,13 @@ int main ()
         if (tp[0] == 'N') 
         {
             scanf ("%lld%lf%lf", &Id, &lat, &lon);
-            a[tot++] = lon;
+            a[tot++] = (ll) (lon * 10000000);
         }
     }
     std :: sort (a, a + tot);
-    for (int i = 0; i <= tot / 500; ++i)
-        printf ("%.7lf\n", a[i * 500]);*/
+    for (int i = 0; i <= tot/1000; ++i)
+        printf ("%lld\n", a[i*1000]);
+    */
     while (~scanf ("%s", tp))
     {
         if (tp[0] == 'N')
@@ -40,9 +41,9 @@ int main ()
         {
             scanf ("%lf%lf", &lat, &lon);
             ll ans = blk :: find (lat, lon);
-/*            if (ans)
-                printf ("%.8lf\n", node[map_node[ans]].dis (lat, lon));
-            else puts ("0");*/
+         //   if (ans)
+         //       printf ("%.8lf\n", node[map_node[ans]].dis (lat, lon));
+         //   else puts ("0");
             printf ("%lld\n", ans);
         }
     }
