@@ -10,15 +10,24 @@ class Node
     double sqr (double );
     public :
     ll lat, lon, Id;
-    bool tag;
+    std :: vector <ll> edge;
     double dis (int);
     double dis (double , double);
     Node () {}
-    Node (ll Id_, double lat_, double lon_, bool tag_) {Id = Id_; lat = (ll) (lat_ * ext); lon = (ll) (lon_ * ext); tag = tag_;}
+    Node (ll Id_, double lat_, double lon_) {Id = Id_; lat = (ll) (lat_ * ext); lon = (ll) (lon_ * ext);}
 };
 
-extern Node* node; 
-extern Hash map_node; 
-extern int tot_node;
+class Nodes
+{
+    Hash map_node; 
+    public :
+    Node node [600000];
+    int tot_node;
+    Nodes () {tot_node = 0; map_node = Hash (600000, 1000007);/* puts ("abc"); map_node.insert (0, 0); puts ("abc");*/}
+    void add_node (ll , double , double );
+    Node operator [] (ll Id);
+};
 
-void add_node (ll , double , double , bool );
+extern int tot_node;
+extern Nodes node;
+

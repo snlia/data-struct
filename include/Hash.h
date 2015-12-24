@@ -10,8 +10,8 @@ class Hash
     };
     ll Mod;
     int Maxn, top;
-    int *r;
-    data *h;
+    std :: vector <int> r;
+    std :: vector <data> h;
     public :
     Hash () {};
     Hash (int Maxn_, ll Mod_) 
@@ -19,9 +19,8 @@ class Hash
         Mod = Mod_;
         Maxn = Maxn_;
         top = -1;
-        r = new int [Mod];
-        h = new data [Maxn];
-        memset (r, 255, sizeof (int) * Mod);
+        r = std :: vector <int> (Mod, -1);
+        h = std :: vector <data> (Maxn);
     }
     void insert (ll x, int y)
     {
@@ -38,10 +37,5 @@ class Hash
             if (h[p].x == x)
                 return h[p].adj;
         return -1;
-    }
-    ~Hash ()
-    {
-        delete [] r;
-        delete [] h;
     }
 };

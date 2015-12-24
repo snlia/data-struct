@@ -1,5 +1,5 @@
 #include "Node.h"
-Node *node;
+Nodes node;
 
 const double Node::EARTH_RADIUS = 6378.137;
 const double Node::PI = 3.1415926535898;
@@ -23,11 +23,13 @@ double Node :: dis (double lat_, double lon_)
 
 double Node :: dis (int Id_)
 {
-    return dis ((node[map_node[Id_]].lat + 0.0) / ext, (node[map_node[Id_]].lon + 0.0) / ext);
+    return dis ((node[Id_].lat + 0.0) / ext, (node[Id_].lon + 0.0) / ext);
 }
 
-void add_node (ll Id, double lat, double lon, bool tag)
+void Nodes :: add_node (ll Id, double lat, double lon)
 {
-    node[tot_node] = Node (Id, lat, lon, tag);
+    node[tot_node] = Node (Id, lat, lon);
     map_node.insert (Id, tot_node); ++tot_node;
 }
+
+Node Nodes :: operator [] (ll Id) {return node[map_node[Id]];}

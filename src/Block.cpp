@@ -3,9 +3,9 @@
 void blk :: insert (ll Id)
 {
     int l = 0, r = MAX_LEN - 1;
-    ll lon = node[map_node[Id]].lon;
+    ll lon = node[Id].lon;
     while (l != r) {int m = (l + r + 1) >> 1; if (lon >= Par[m]) l = m; else r = m - 1;}
-    ll lat = node[map_node[Id]].lat;
+    ll lat = node[Id].lat;
     Block *p = T + l;
     for (; p->next != NULL && p->rx < lat; p = p->next);
     p->push (Id);
@@ -24,11 +24,11 @@ ll blk :: ck_block (int x, double lat, double lon)
     Block *ppp = p->next;
     ll ans1 = pp->check (lat, lon);
     ll ans2 = p->check (lat, lon);
-    ll ans = node[map_node[ans1]].dis (lat, lon) < node[map_node[ans2]].dis (lat, lon) ? ans1 : ans2;
+    ll ans = node[ans1].dis (lat, lon) < node[ans2].dis (lat, lon) ? ans1 : ans2;
     if (ppp != NULL) 
     {
         ll ans3 = ppp-> check (lat, lon);
-        ans = node[map_node[ans]].dis (lat, lon) < node[map_node[ans3]].dis (lat, lon) ? ans : ans3;
+        ans = node[ans].dis (lat, lon) < node[ans3].dis (lat, lon) ? ans : ans3;
     }
     return ans;
 }
@@ -40,15 +40,15 @@ ll blk :: find (double lat, double lon)
     while (l != r) {int m = (l + r + 1) >> 1; if (Lon >= Par[m]) l = m; else r = m - 1;}
     ll ans1 = ck_block (std :: max (l - 1, 0), lat, lon);
     ll ans2 = ck_block (l, lat, lon);
-    ll ans = node[map_node[ans1]].dis (lat, lon) < node[map_node[ans2]].dis (lat, lon) ? ans1 : ans2;
+    ll ans = node[ans1].dis (lat, lon) < node[ans2].dis (lat, lon) ? ans1 : ans2;
     ll ans3 = ck_block (std :: min (l + 1, MAX_LEN - 1), lat, lon);
-    ans = node[map_node[ans]].dis (lat, lon) < node[map_node[ans3]].dis (lat, lon) ? ans : ans3;
+    ans = node[ans].dis (lat, lon) < node[ans3].dis (lat, lon) ? ans : ans3;
     return ans;
 }
 
 bool Block :: cmp (ll Id_a, ll Id_b)
 {
-    return node[map_node[Id_a]].lat < node[map_node[Id_b]].lat;
+    return node[Id_a].lat < node[Id_b].lat;
 }
 
 void Block :: push (ll Id)
@@ -65,16 +65,16 @@ void Block :: push (ll Id)
         for (int i = MAX_SIZE / 2; i < (int) adj.size (); ++i)
             p->adj.push_back (adj[i]);
         adj.resize (MAX_SIZE / 2);
-        p->lx = node[map_node[p->adj[0]]].lat;
-        p->rx = node[map_node[*p->adj.rbegin()]].lat;
+        p->lx = node[p->adj[0]].lat;
+        p->rx = node[*p->adj.rbegin()].lat;
         p->next = next;
         next = p;
-        lx = node[map_node[adj[0]]].lat;
-        rx = node[map_node[*adj.rbegin ()]].lat;
+        lx = node[adj[0]].lat;
+        rx = node[*adj.rbegin ()].lat;
         p = next;
     }
-    lx = node[map_node[adj[0]]].lat;
-    rx = node[map_node[*adj.rbegin ()]].lat;
+    lx = node[adj[0]].lat;
+    rx = node[*adj.rbegin ()].lat;
 }
 
 ll Block :: check (double lat, double lon)
@@ -83,7 +83,7 @@ ll Block :: check (double lat, double lon)
     ll ans = adj[0];
     for (int i = 1; i < (int) adj.size (); ++i)
     {
-        if (node[map_node[adj[i]]].dis (lat, lon) < node[map_node[ans]].dis (lat, lon))
+        if (node[adj[i]].dis (lat, lon) < node[ans].dis (lat, lon))
             ans = adj[i];
     }
     return ans;

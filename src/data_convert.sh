@@ -15,4 +15,4 @@ echo "convert into node..."
 time cat $data/nodes.osm |grep "node\|tag"|sed "s/.*node id=\"\(\<.*\>\)\" lat=\"\(\<.*\>\)\" lon=\"\(\<.*\>\)\".*/\=\1 \2 \3/;/tag/s/.*k=\"\([a-zA-Z0-9_:-]\+\)\" v=\"\(.*\)\".*/|\1 \2/;/\t/s/\t//" >$data/node
 
 echo "convert into way..."
-time cat $data/ways.osm | grep '\<nd\|way\|tag' | sed '/nd/s/.*nd.*\(\<[0-9]\+\>\).*/node \1/;/way/s/.*way.*\(\<[0-9]\+\>\).*/\<way \1/;/tag/s/.*k=\"\([a-zA-Z0-9_:-]\+\)\" v=\"\(.*\)\".*/tag \1 \2/;/\t/s/\t//' > $data/way
+time cat $data/ways.osm | grep '\<nd\|way\|tag' | sed '/nd/s/.*nd.*\(\<[0-9]\+\>\).*/[\1/;/way/s/.*way.*\(\<[0-9]\+\>\).*/=\1/;/tag/s/.*k=\"\([a-zA-Z0-9_:-]\+\)\" v=\"\(.*\)\".*/|\1 \2/;/\t/s/\t//' > $data/way
