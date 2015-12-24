@@ -1,7 +1,5 @@
 #include "Block.h"
 
-bool pk = 0;
-
 void blk :: insert (ll Id)
 {
     int l = 0, r = MAX_LEN - 1;

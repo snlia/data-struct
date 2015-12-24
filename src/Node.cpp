@@ -1,6 +1,4 @@
 #include "Node.h"
-Hash map_node (600000, 1000007);
-int tot_node = 0;
 Node *node;
 
 const double Node::EARTH_RADIUS = 6378.137;
