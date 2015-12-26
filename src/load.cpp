@@ -19,9 +19,9 @@ void load_node ()
         }
         else if (tp == '|')
         {
-            fscanf (NODE, "%s", key);
+            fscanf (NODE, "%s%c", key, &tp);
             fgets (value, 50, NODE);
-            value[strlen (value) - 2] = 0;
+            value[strlen (value) - 1] = 0;
             tag.insert (now, key, value);
         }
         else fgets (value, 50, NODE);
@@ -35,15 +35,12 @@ void load_way ()
     char tp;
     ll Id, now = 0;
     char key [50], value [50];
-    char a []= "?";
-//    int tot = 0;
     while (~fscanf (WAY, "%c", &tp))
     {
         if (tp == '=')
         {
             fscanf (WAY, "%lld\n", &Id);
             now = Id;
-            tag.insert (now, a, a);
         }
         else if (tp == '[')
         {

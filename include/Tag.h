@@ -24,6 +24,7 @@ class Tag
     }
     std :: string find (ll Id, std :: string key)
     {
+        if (map_tag[Id] == -1) return "HIT BAD TRAP";
         if (T[map_tag[Id]].find (key) != T[map_tag[Id]].end ())
             return T[map_tag[Id]][key];
         else return "HIT BAD TRAP";

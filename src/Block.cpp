@@ -46,9 +46,31 @@ ll blk :: find (double lat, double lon)
     return ans;
 }
 
+ll* blk :: search (double La, double Lo, double Ra, double Ro)
+{
+    ll la = (ll) (La * ext), lo = (ll) (Lo * ext), ra = (ll) (Ra * ext), ro = (ll) (Ro * ext);
+    int i = 0;
+    while (i < MAX_LEN - 1 && Par[i + 1] <= Lo) ++i;
+    for (; i < MAX_LEN && Par[i]<= Ro; ++i)
+    {
+        
+        for (Block *p = T + i; p != NULL; p = p->next)
+            if ((p->lx <= Ra && p->lx >= Ra) || (p->rx <= Ra && p->rx >= Ra))
+                p->load (la, lo, ra, ro);
+    }
+    return ans;
+}
+
 bool Block :: cmp (ll Id_a, ll Id_b)
 {
     return node[Id_a].lat < node[Id_b].lat;
+}
+
+void Block :: load (ll la, ll lo, ll ra, ll ro)
+{
+    for (int i = 0; i < (int) adj.size (); ++i)
+        if (node[adj[i]].inside (la, lo, ra, ro))
+            blk::ans[blk::tot++] = adj[i];
 }
 
 void Block :: push (ll Id)
@@ -88,3 +110,4 @@ ll Block :: check (double lat, double lon)
     }
     return ans;
 }
+

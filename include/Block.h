@@ -68,6 +68,7 @@ class Block
     ll lx, rx;
     void push (ll Id);
     ll check (double , double );
+    void load (ll, ll, ll, ll);
     Block () {}
 };
 
@@ -75,7 +76,10 @@ static Block T [MAX_LEN];
 
 namespace blk
 {
+    int tot = 0;
+    ll ans [600000];
     ll ck_block (int , double , double );
     void insert (ll );
+    ll* search (double, double, double, double);
     ll find (double, double);
 }

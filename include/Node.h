@@ -9,14 +9,15 @@ class Node
     double rad (double );
     double sqr (double );
     public :
-    ll lat, lon, Id;
-    bool vis;
-    double adj;
+    ll lat, lon, Id, fa, Fa;
+    bool vis, onway;
+    double adj, fadj;
     std :: vector <std::pair <ll, double> > edge;
     double dis (ll);
     double dis (double , double);
+    bool inside (ll, ll, ll, ll);
     Node () {}
-    Node (ll Id_, double lat_, double lon_) {Id = Id_; lat = (ll) (lat_ * ext); lon = (ll) (lon_ * ext);}
+    Node (ll Id_, double lat_, double lon_) {Fa = fa = Id_; vis = onway = 0; fadj = adj = 0; edge.clear (); Id = Id_; lat = (ll) (lat_ * ext); lon = (ll) (lon_ * ext);}
 };
 
 class Nodes
@@ -32,4 +33,4 @@ class Nodes
 };
 
 extern Nodes node;
-
+ll getf (ll );

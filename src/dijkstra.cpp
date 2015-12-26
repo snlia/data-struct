@@ -13,7 +13,7 @@ void dijkstra (ll s, ll t)
     while (!Q.empty ())
     {
         ll x = Q.top ().second;
-        if (x == t) {printf ("%.7lf\n", node[t].adj); return ;}
+        if (x == t) {printf ("%.7lfm\n", node[t].adj); return ;}
         double now_dis = Q.top ().first;
         Q.pop ();
         if (node[x].adj < now_dis) continue;

@@ -7,6 +7,8 @@
 #include "Init.h"
 
 void dijkstra (ll, ll);
+void Astar (ll, ll);
+void spfa (ll, ll);
 
 int main ()
 {
@@ -15,6 +17,10 @@ int main ()
     load_way ();
     ll s, t;
     while (~scanf ("%lld%lld", &s, &t))
+    {
         dijkstra (s, t);
+        Astar (s, t);
+        spfa (s, t);
+    }
     return 0;
 }
