@@ -5,54 +5,60 @@
 
 void load_node ()
 {
-    freopen ("data/node", "r", stdin);
+    FILE *NODE = fopen ("data/node", "r");
     char tp;
     ll Id, now = 0; double lat, lon;
     char key [50], value [50];
-    while (~scanf ("%c", &tp))
+    while (~fscanf (NODE, "%c", &tp))
     {
         if (tp == '=')
         {
-            scanf ("%lld%lf%lf\n", &Id, &lat, &lon);
+            fscanf (NODE, "%lld%lf%lf\n", &Id, &lat, &lon);
             now = Id;
             node.add_node (Id, lat, lon);
         }
         else if (tp == '|')
         {
-            scanf ("%s", key);
-            fgets (value, 50, stdin);
+            fscanf (NODE, "%s", key);
+            fgets (value, 50, NODE);
             value[strlen (value) - 2] = 0;
             tag.insert (now, key, value);
         }
-        else fgets (value, 50, stdin);
+        else fgets (value, 50, NODE);
     }
+    fclose (NODE);
 }
 
 void load_way ()
 {
-    freopen ("data/way", "r", stdin);
+    FILE *WAY = fopen ("data/way", "r");
     char tp;
     ll Id, now = 0;
     char key [50], value [50];
-    while (~scanf ("%c", &tp))
+    char a []= "?";
+//    int tot = 0;
+    while (~fscanf (WAY, "%c", &tp))
     {
         if (tp == '=')
         {
-            scanf ("%lld\n", &Id);
+            fscanf (WAY, "%lld\n", &Id);
             now = Id;
+            tag.insert (now, a, a);
         }
         else if (tp == '[')
         {
-            scanf ("%lld\n", &Id);
+            fscanf (WAY, "%lld\n", &Id);
             way.insert (now, Id);
         }
         else if (tp == '|')
         {
-            scanf ("%s", key);
-            fgets (value, 50, stdin);
-            value[strlen (value) - 2] = 0;
+            fscanf (WAY, "%s%c", key, &tp);
+            fgets (value, 50, WAY);
+            value[strlen (value) - 1] = 0;
             tag.insert (now, key, value);
         }
-        else fgets (value, 50, stdin);
+        else fgets (value, 50, WAY);
     }
+    way.build_road ();
+    fclose (WAY);
 }

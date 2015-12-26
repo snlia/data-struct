@@ -15,7 +15,7 @@ void Way :: insert (ll Id_, ll Id_node)
     way[tx].push_back (Id_node);
 }
 
-std :: vector <ll> Way :: operator [] (ll Id){return way[map_way[Id]];}
+std :: vector <ll>& Way :: operator [] (ll Id){return way[map_way[Id]];}
 
 void Way :: build_road ()
 {
@@ -23,10 +23,10 @@ void Way :: build_road ()
     {
         std :: string s = tag.find (Id[i], "oneway");
         if (s == "yes" || s == "no")
-            for (int j = 1; j < (int) way[i].size (); ++i)
-                node[way[i][j - 1]].edge.push_back (way[i][j]);
+            for (int j = 1; j < (int) way[i].size (); ++j)
+                node[way[i][j - 1]].edge.push_back (std::make_pair (way[i][j], node[way[i][j - 1]].dis (way[i][j])));
         if (s == "no")
-            for (int j = 1; j < (int) way[i].size (); ++i)
-                node[way[i][j]].edge.push_back (way[i][j - 1]);
+            for (int j = 1; j < (int) way[i].size (); ++j)
+                node[way[i][j]].edge.push_back (std::make_pair (way[i][j - 1], node[way[i][j]].dis (way[i][j - 1])));
     }
 }

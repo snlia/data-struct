@@ -11,7 +11,7 @@ class Way
     ll Id [80000];
     void insert (ll , ll );
     void build_road ();
-    std :: vector <ll> operator [] (ll );
+    std :: vector <ll>& operator [] (ll );
     Way (){tot = 0; map_way = Hash (80000, 1000007);}
 };
 

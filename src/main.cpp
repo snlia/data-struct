@@ -6,10 +6,15 @@
 #include "load.h"
 #include "Init.h"
 
+void dijkstra (ll, ll);
+
 int main ()
 {
     node.add_node (0, 0, 0);
     load_node ();
     load_way ();
+    ll s, t;
+    while (~scanf ("%lld%lld", &s, &t))
+        dijkstra (s, t);
     return 0;
 }

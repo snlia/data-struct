@@ -16,8 +16,11 @@ class Tag
         if (!~tx)
         {
             map_tag.insert (Id, tot);
-            T[tot++].insert (std :: make_pair (std :: string (key), std :: string (value)));
+            T[tot].insert (std :: make_pair (std :: string (key), std :: string (value)));
+            tot++;
         }
+        else 
+            T[tx].insert (std :: make_pair (std :: string (key), std :: string (value)));
     }
     std :: string find (ll Id, std :: string key)
     {

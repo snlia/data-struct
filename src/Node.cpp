@@ -21,7 +21,7 @@ double Node :: dis (double lat_, double lon_)
     return s;
 }
 
-double Node :: dis (int Id_)
+double Node :: dis (ll Id_)
 {
     return dis ((node[Id_].lat + 0.0) / ext, (node[Id_].lon + 0.0) / ext);
 }
@@ -32,4 +32,9 @@ void Nodes :: add_node (ll Id, double lat, double lon)
     map_node.insert (Id, tot_node); ++tot_node;
 }
 
-Node Nodes :: operator [] (ll Id) {return node[map_node[Id]];}
+void Nodes :: reset ()
+{
+    for (int i = 0; i < tot_node; ++i) node[i].adj = 10000007, node[i].vis = 0;
+}
+
+Node& Nodes :: operator [] (ll Id) {return node[map_node[Id]];}
