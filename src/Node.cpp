@@ -36,14 +36,12 @@ void Nodes :: add_node (ll Id, double lat, double lon)
     map_node.insert (Id, tot_node); ++tot_node;
 }
 
-void Nodes :: reset () {for (int i = 0; i < tot_node; ++i) node[i].adj = 10000007, node[i].vis = 0, node[i].Fa2 = node[i].Fa = node[i].fa = node[i].Id, node[i].fadj = 0;}
+void Nodes :: reset () {for (int i = 0; i < tot_node; ++i) node[i].adj = 10000007, node[i].vis = 0, node[i].Fa = node[i].fa = node[i].Id, node[i].fadj = 0;}
 
 ll getf (ll Id) 
 {
     if (node[Id].Fa == Id) return Id;
     ll tx = getf (node[Id].Fa);
-    if (node[Id].Fa == node[node[Id].fa].Fa) node[Id].Fa2 = Id;
-    else node[Id].Fa2 = node[node[Id].fa].Fa2;
     node[Id].fadj += node[node[Id].Fa].fadj;
     return node[Id].Fa = tx;
 }

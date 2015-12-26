@@ -6,6 +6,7 @@ static std::priority_queue <pdi, std::vector <pdi>, std::greater <pdi> > Q;
 
 void dijkstra (ll s, ll t)
 {
+    clock_t start = clock();
     node.reset ();
     node[s].adj = 0;
     while (!Q.empty ()) Q.pop ();
@@ -13,7 +14,7 @@ void dijkstra (ll s, ll t)
     while (!Q.empty ())
     {
         ll x = Q.top ().second;
-        if (x == t) {printf ("%.7lfm\n", node[t].adj); return ;}
+        if (x == t) {printf ("%.7lfm\n", node[t].adj); printf ("using time %.4lf\n", (clock () - start + 0.0) / CLOCKS_PER_SEC); return ;}
         double now_dis = Q.top ().first;
         Q.pop ();
         if (node[x].adj < now_dis) continue;

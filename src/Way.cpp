@@ -20,17 +20,18 @@ std :: vector <ll>& Way :: operator [] (ll Id){return way[map_way[Id]];}
 void Way :: build_road ()
 {
     for (int i = 0; i < tot; ++i)
-    {
-        std :: string s = tag.find (Id[i], "oneway");
-        if (s == "yes" || s == "no")
+        if (tag.find (Id[i], "highway") != "HIT BAD TRAP")
         {
-            for (int j = 1; j < (int) way[i].size (); ++j)
-                node[way[i][j - 1]].edge.push_back (std::make_pair (way[i][j], node[way[i][j - 1]].dis (way[i][j])));
-            for (int j = 0; j < (int) way[i].size (); ++j)
-                node[way[i][j]].onway = 1;
+            std :: string s = tag.find (Id[i], "oneway");
+            if (s == "yes" || s == "no")
+            {
+                for (int j = 1; j < (int) way[i].size (); ++j)
+                    node[way[i][j - 1]].edge.push_back (std::make_pair (way[i][j], node[way[i][j - 1]].dis (way[i][j])));
+                for (int j = 0; j < (int) way[i].size (); ++j)
+                    node[way[i][j]].onway = 1;
+            }
+            if (s == "no")
+                for (int j = 1; j < (int) way[i].size (); ++j)
+                    node[way[i][j]].edge.push_back (std::make_pair (way[i][j - 1], node[way[i][j]].dis (way[i][j - 1])));
         }
-        if (s == "no")
-            for (int j = 1; j < (int) way[i].size (); ++j)
-                node[way[i][j]].edge.push_back (std::make_pair (way[i][j - 1], node[way[i][j]].dis (way[i][j - 1])));
-    }
 }

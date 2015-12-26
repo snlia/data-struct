@@ -3,6 +3,7 @@
 
 void spfa (ll s, ll t)
 {
+    clock_t start = clock();
     std::deque <ll> Q;
     Q.clear ();
     Q.push_back (s);
@@ -24,7 +25,7 @@ void spfa (ll s, ll t)
             double Dis = node[x].edge[i].second + now_dis + node[node[x].edge[i].first].fadj;
             if (Dis < node[tx].adj)
             {
-                node[tx].fa = getf (node[x].edge[i].first) == node[x].edge[i].first ? x : node[node[x].edge[i].first].Fa2;
+                node[tx].fa = x;
                 node[tx].adj = Dis;
                 if (!node[tx].vis && node[tx].adj + node[tx].dis (t) < node[t].adj)
                 {
@@ -37,4 +38,5 @@ void spfa (ll s, ll t)
         }
     }
     printf ("%.7lfm\n", node[t].adj);
+    printf ("using time %.4lf\n", (clock () - start + 0.0) / CLOCKS_PER_SEC);
 }
