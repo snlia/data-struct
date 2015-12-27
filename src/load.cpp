@@ -1,5 +1,6 @@
 #include "load.h"
 #include "Node.h"
+#include "Taxi.h"
 #include "Block.h"
 #include "Tag.h"
 #include "Way.h"
@@ -60,4 +61,20 @@ void load_way ()
     way.build_road ();
     node.build_block ();
     fclose (WAY);
+}
+
+void load_taxi ()
+{
+    FILE *TAXI = fopen ("data/Taxi", "r");
+    int Id, Time, tot = 0;
+    ll Id_;
+    double lat, lon;
+    tot_taxi = -1;
+    while (~fscanf (TAXI, "%d%d%lld", &Id, &Time, &Id_))
+    {
+        if (map_taxi[Id] == -1) map_taxi.insert (Id, ++tot_taxi);
+        taxi_time[tot_taxi].push_back (Time);
+        taxi_point[tot_taxi].push_back (Id_);
+    }
+    fclose (TAXI);
 }

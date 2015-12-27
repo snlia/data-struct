@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Taxi.h"
 #include "Block.h"
 #include "Map.h"
 #include "Way.h"
@@ -34,6 +35,15 @@ void Map::myDisplay()
         for (int i = 0; i < blk::Ans.size (); ++i)
             glVertex2f (((node[blk::Ans[i]].lat - La + 0.0) / (Ra - La) * 1.9 - 0.95), ((node[blk::Ans[i]].lon - Lo + 0.0) / (Ro - Lo) * 1.9 - 0.95));
         glEnd();
+    }
+    if (Taxi_way.size ())
+    {
+        glColor3f(1.0f, 1.0f, 0.0f);
+        glBegin(GL_LINE_STRIP);
+        for (int i = 0; i < (int) Taxi_way.size (); ++i)
+            glVertex2f (((node[Taxi_way[i]].lat - La + 0.0) / (Ra - La) * 1.9 - 0.95), ((node[Taxi_way[i]].lon - Lo + 0.0) / (Ro - Lo) * 1.9 - 0.95));
+        glEnd();
+
     }
     glFlush();
 }

@@ -7,6 +7,7 @@
 #include "Hash.h"
 #include "load.h"
 #include "Init.h"
+#include "Taxi.h"
 
 void dijkstra (ll, ll);
 void Astar (ll, ll);
@@ -20,9 +21,11 @@ int main (int argc, char *argv[])
     load_node ();
     puts ("Loading ways...");
     load_way ();
-    puts ("clear!");
+    puts ("Loading taxi...");
+    load_taxi ();
+    puts ("Done!");
     ll s = -1, t = -1;
-    int x;
+    int x, Id, h0, m0, s0, h1, m1, s1;
     double la, lo, ra, ro;
     char tp [10];
     char S [1000];
@@ -73,6 +76,11 @@ int main (int argc, char *argv[])
         {
             scanf ("%lf%lf%lf%lf", &la, &lo, &ra, &ro);
             Map::draw_map (argc, argv, la, lo, ra, ro, s, t);
+        }
+        if (std::string (tp) == "taxi")
+        {
+            scanf ("%d%d:%d:%d%d:%d:%d", &Id, &h0, &m0, &s0, &h1, &m1, &s1);
+            search_taxi (Id, h0 * 3600 + m0 * 60 + s0, h1 * 3600 + m1 * 60 + s1);
         }
     }
     return 0;

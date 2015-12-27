@@ -2,7 +2,7 @@
 #include "common.h"
 #include "Node.h"
 
-const static int MAX_SIZE = 50;
+const static int MAX_SIZE = 35;
 const static int MAX_LEN = 505;
 const static ll Par [MAX_LEN] = 
 {
