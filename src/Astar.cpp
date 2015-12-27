@@ -15,8 +15,6 @@ void Astar (ll s, ll t)
     {
         ll x = Q.top ().second;
         if (x == t) {printf ("%.7lfm\n", node[t].adj); printf ("using time %.4lf\n", (clock () - start + 0.0) / CLOCKS_PER_SEC); 
-    for (ll x = t; x != s; x = node[x].fa) printf ("%lld ", x);
-    puts ("");
             return ;}
         Q.pop ();
         if (node[x].vis) continue;
@@ -29,10 +27,11 @@ void Astar (ll s, ll t)
             {
                 node[tx].fa = x;
                 node[tx].adj = now_dis + node[x].edge[i].second;
-                if (node[tx].adj + node[tx].dis (t) < node[t].adj)
+                if (tx == t || node[tx].adj + node[tx].dis (t) < node[t].adj)
                     Q.push(std::make_pair (node[tx].adj + node[tx].dis (t), tx));
             }
         }
     }
+    puts ("no way!");
 }
 

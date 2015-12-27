@@ -9,11 +9,15 @@ void spfa (ll s, ll t)
     Q.push_back (s);
     node.reset ();
     node[s].adj = 0;
+    double sum = 0;
     while (!Q.empty ())
     {
-        ll x = Q.front (); Q.pop_front ();
+        ll x;
+        for (x = Q.front (); node[x].adj > sum / Q.size (); Q.push_back (Q.front ()), Q.pop_front (), x = Q.front ());
+        Q.pop_front ();
         node[x].vis = 0;
         double now_dis = node[x].adj;
+        sum -= now_dis;
         if (getf (x) == x && node[x].edge.size () == 1 && x != getf (node[x].edge[0].first))
         {
             node[x].Fa = node[x].edge[0].first;
@@ -30,9 +34,10 @@ void spfa (ll s, ll t)
                 if (!node[tx].vis && node[tx].adj + node[tx].dis (t) < node[t].adj)
                 {
                     node[tx].vis = 1;
-                    if (node[tx].adj > node[Q.front ()].adj)
+                    if (Q.empty () || node[tx].adj > node[Q.front ()].adj)
                         Q.push_front (tx);
                     else Q.push_back (tx);
+                    sum += Dis;
                 }
             }
         }

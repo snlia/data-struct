@@ -76,10 +76,14 @@ static Block T [MAX_LEN];
 
 namespace blk
 {
-    int tot = 0;
-    ll ans [600000];
+    extern double Lat_, Lon_;
+    extern std::vector <ll> Ans;
     ll ck_block (int , double , double );
+    bool cmp (ll, ll);
     void insert (ll );
-    ll* search (double, double, double, double);
+    void search (double, double, double, double);
+    void fiter (std::string S);
+    void list ();
+    void near (int , double, double);
     ll find (double, double);
 }

@@ -1,5 +1,6 @@
 #include "load.h"
 #include "Node.h"
+#include "Block.h"
 #include "Tag.h"
 #include "Way.h"
 
@@ -16,6 +17,7 @@ void load_node ()
             fscanf (NODE, "%lld%lf%lf\n", &Id, &lat, &lon);
             now = Id;
             node.add_node (Id, lat, lon);
+            blk::insert (Id);
         }
         else if (tp == '|')
         {
@@ -57,5 +59,6 @@ void load_way ()
         else fgets (value, 50, WAY);
     }
     way.build_road ();
+//    node.cksize ();
     fclose (WAY);
 }

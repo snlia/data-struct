@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Block.h"
 #include "Tag.h"
 #include "Way.h"
 #include "Node.h"
@@ -10,17 +11,66 @@ void dijkstra (ll, ll);
 void Astar (ll, ll);
 void spfa (ll, ll);
 
-int main ()
+int main (int argc, char *argv[])
 {
     node.add_node (0, 0, 0);
+    puts ("Loading nodes...");
     load_node ();
+    puts ("Loading ways...");
     load_way ();
+    puts ("clear!");
     ll s, t;
-    while (~scanf ("%lld%lld", &s, &t))
+    int x;
+    double la, lo, ra, ro;
+    char tp [10];
+    char S [1000];
+    while (~scanf ("%s", tp))
     {
-        dijkstra (s, t);
-        Astar (s, t);
-        spfa (s, t);
+        if (std::string (tp) == "dijkstra")
+        {
+            scanf ("%lld%lld", &s, &t);
+            dijkstra (s, t);
+        }
+        if (std::string (tp) == "Astar")
+        {
+            scanf ("%lld%lld", &s, &t);
+            Astar (s, t);
+        }
+        if (std::string (tp) == "spfa")
+        {
+            scanf ("%lld%lld", &s, &t);
+            spfa (s, t);
+        }
+        if (std::string (tp) == "range")
+        {
+            scanf ("%lf%lf%lf%lf", &la, &lo, &ra, &ro);
+            blk::search (la, lo, ra, ro);
+            printf ("Find %d points.\n", (int) blk::Ans.size ());
+        }
+        if (std::string (tp) == "neighbour")
+        {
+            scanf ("%lf%lf", &la, &lo);
+            ll ans = blk::find (la, lo);
+            printf ("Finding Point with Id: %lld, dis :%.4lf\n", ans, node[ans].dis (la, lo));
+        }
+        if (std::string (tp) == "fiter")
+        {
+            scanf ("%s", S);
+            blk::fiter (std::string (S));
+            printf ("Find %d points.\n", (int) blk::Ans.size ());
+        }
+        if (std::string (tp) == "near")
+        {
+            scanf ("%d%lf%lf", &x, &la, &lo);
+            blk::near (x, la, lo);
+            puts ("done");
+        }
+        if (std::string (tp) == "list")
+            blk::list ();
+        if (std::string (tp) == "map")
+        {
+            way.draw_map (argc, argv);
+        }
     }
     return 0;
 }

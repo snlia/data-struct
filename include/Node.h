@@ -28,6 +28,7 @@ class Nodes
     public :
     Nodes () {tot_node = 0; map_node = Hash (600000, 1000007);}
     void add_node (ll , double , double );
+    void cksize ();
     void reset ();
     Node& operator [] (ll Id);
 };

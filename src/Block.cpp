@@ -1,4 +1,10 @@
 #include "Block.h"
+#include "Tag.h"
+
+namespace blk{
+    std::vector <ll> Ans;
+    double Lat_, Lon_;
+}
 
 void blk :: insert (ll Id)
 {
@@ -10,6 +16,29 @@ void blk :: insert (ll Id)
     for (; p->next != NULL && p->rx < lat; p = p->next);
     p->push (Id);
 }
+
+void blk::fiter (std::string S)
+{
+    int tot = 0;
+    for (int i = 0; i < (int) Ans.size (); ++i)
+        if (tag.fiter (Ans[i], S))
+            Ans[tot++] = Ans[i];
+    Ans.resize (tot);
+}
+
+bool blk::cmp (ll Id_a, ll Id_b)
+{
+    return node[Id_a].dis (Lat_, Lon_) < node[Id_b].dis (Lat_, Lon_);
+}
+
+void blk::near (int x, double lat, double lon)
+{
+    Lat_ = lat; Lon_ = lon;
+    std::sort (Ans.begin (), Ans.end (), cmp);
+    if (x < (int) Ans.size ()) Ans.resize (x);
+}
+
+void blk::list () {for (int i = 0; i < (int) Ans.size (); ++i) printf ("Id :%lld\n", Ans[i]);}
 
 ll blk :: ck_block (int x, double lat, double lon)
 {
@@ -43,22 +72,21 @@ ll blk :: find (double lat, double lon)
     ll ans = node[ans1].dis (lat, lon) < node[ans2].dis (lat, lon) ? ans1 : ans2;
     ll ans3 = ck_block (std :: min (l + 1, MAX_LEN - 1), lat, lon);
     ans = node[ans].dis (lat, lon) < node[ans3].dis (lat, lon) ? ans : ans3;
+    Ans.clear ();
+    Ans.push_back (ans);
     return ans;
 }
 
-ll* blk :: search (double La, double Lo, double Ra, double Ro)
+void blk :: search (double La, double Lo, double Ra, double Ro)
 {
     ll la = (ll) (La * ext), lo = (ll) (Lo * ext), ra = (ll) (Ra * ext), ro = (ll) (Ro * ext);
     int i = 0;
-    while (i < MAX_LEN - 1 && Par[i + 1] <= Lo) ++i;
-    for (; i < MAX_LEN && Par[i]<= Ro; ++i)
-    {
-        
+    Ans.clear ();
+    while (i < MAX_LEN - 1 && Par[i + 1] <= lo) ++i;
+    for (; i < MAX_LEN && Par[i]<= ro; ++i)
         for (Block *p = T + i; p != NULL; p = p->next)
-            if ((p->lx <= Ra && p->lx >= Ra) || (p->rx <= Ra && p->rx >= Ra))
+            if ((p->lx <= ra && p->lx >= la) || (p->rx <= ra && p->rx >= la))
                 p->load (la, lo, ra, ro);
-    }
-    return ans;
 }
 
 bool Block :: cmp (ll Id_a, ll Id_b)
@@ -70,7 +98,7 @@ void Block :: load (ll la, ll lo, ll ra, ll ro)
 {
     for (int i = 0; i < (int) adj.size (); ++i)
         if (node[adj[i]].inside (la, lo, ra, ro))
-            blk::ans[blk::tot++] = adj[i];
+            blk::Ans.push_back (adj[i]);
 }
 
 void Block :: push (ll Id)

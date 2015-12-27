@@ -28,12 +28,27 @@ double Node :: dis (ll Id_)
     return dis ((node[Id_].lat + 0.0) / ext, (node[Id_].lon + 0.0) / ext);
 }
 
+
 bool Node :: inside (ll la, ll lo, ll ra, ll ro) {return (lat <= ra) && (lat >= la) && (lon <= ro) && (lon >= lo);}
 
 void Nodes :: add_node (ll Id, double lat, double lon)
 {
     node[tot_node] = Node (Id, lat, lon);
     map_node.insert (Id, tot_node); ++tot_node;
+}
+
+void Nodes::cksize ()
+{
+    double min_lat = 10000, min_lon = 1000, max_lat = -1000, max_lon = -1000;
+    for (int i = 0; i < tot_node; ++i)
+        if (node[i].onway)
+        {
+            min_lon = std::min (min_lon, (node[i].lon + 0.0) / ext);
+            min_lat = std::min (min_lat, (node[i].lat + 0.0) / ext);
+            max_lon = std::max (max_lon, (node[i].lon + 0.0) / ext);
+            max_lat = std::max (max_lat, (node[i].lat + 0.0) / ext);
+        }
+    printf ("%.7lf %.7lf %.7lf %.7lf", min_lat, min_lon, max_lat, max_lon);
 }
 
 void Nodes :: reset () {for (int i = 0; i < tot_node; ++i) node[i].adj = 10000007, node[i].vis = 0, node[i].Fa = node[i].fa = node[i].Id, node[i].fadj = 0;}
