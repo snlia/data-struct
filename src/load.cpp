@@ -68,7 +68,6 @@ void load_taxi ()
     FILE *TAXI = fopen ("data/Taxi", "r");
     int Id, Time, tot = 0;
     ll Id_;
-    double lat, lon;
     tot_taxi = -1;
     while (~fscanf (TAXI, "%d%d%lld", &Id, &Time, &Id_))
     {
