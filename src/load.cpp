@@ -66,7 +66,7 @@ void load_way ()
 void load_taxi ()
 {
     FILE *TAXI = fopen ("data/Taxi", "r");
-    int Id, Time, tot = 0;
+    int Id, Time;
     ll Id_;
     tot_taxi = -1;
     while (~fscanf (TAXI, "%d%d%lld", &Id, &Time, &Id_))
@@ -74,6 +74,7 @@ void load_taxi ()
         if (map_taxi[Id] == -1) map_taxi.insert (Id, ++tot_taxi);
         taxi_time[tot_taxi].push_back (Time);
         taxi_point[tot_taxi].push_back (Id_);
+        node[Id_].taxi += 1;
     }
     fclose (TAXI);
 }

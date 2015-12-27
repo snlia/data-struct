@@ -40,6 +40,8 @@ bool blk::cmp (ll Id_a, ll Id_b)
     return node[Id_a].dis (Lat_, Lon_) < node[Id_b].dis (Lat_, Lon_);
 }
 
+bool blk::cmp_taxi (ll Id_a, ll Id_b) {return node[Id_a].taxi < node[Id_b].taxi;}
+
 void blk::near (int x, double lat, double lon)
 {
     Lat_ = lat; Lon_ = lon;
@@ -47,9 +49,11 @@ void blk::near (int x, double lat, double lon)
     if (x < (int) Ans.size ()) Ans.resize (x);
 }
 
+void blk::near_taxi () {std::sort (Ans.begin (), Ans.end (), cmp_taxi);}
+
 void blk::list () {for (int i = 0; i < (int) Ans.size (); ++i) printf ("Id :%lld\n", Ans[i]);}
 
-ll blk :: ck_block (int x, double lat, double lon)
+void blk :: ck_block (int x, double lat)
 {
     Block *p = T2 + x;
     ll Lat = (ll) ((lat + 0.0) * ext);
@@ -60,30 +64,21 @@ ll blk :: ck_block (int x, double lat, double lon)
         flag = 1;
     }
     Block *ppp = p->next;
-    ll ans1 = pp->check (lat, lon);
-    ll ans2 = p->check (lat, lon);
-    ll ans = node[ans1].dis (lat, lon) < node[ans2].dis (lat, lon) ? ans1 : ans2;
+    pp->load (0, 0, 900000000LL, 1800000000LL);
+    if (pp != p) p->load (0, 0, 900000000LL, 1800000000LL);
     if (ppp != NULL) 
-    {
-        ll ans3 = ppp-> check (lat, lon);
-        ans = node[ans].dis (lat, lon) < node[ans3].dis (lat, lon) ? ans : ans3;
-    }
-    return ans;
+        ppp->load (0, 0, 900000000LL, 1800000000LL);
 }
 
-ll blk :: find (double lat, double lon)
+void blk :: find (double lat, double lon)
 {
     int l = 0, r = MAX_LEN - 1;
     ll Lon = (ll) ((lon + 0.0) * ext);
     while (l != r) {int m = (l + r + 1) >> 1; if (Lon >= Par[m]) l = m; else r = m - 1;}
-    ll ans1 = ck_block (std :: max (l - 1, 0), lat, lon);
-    ll ans2 = ck_block (l, lat, lon);
-    ll ans = node[ans1].dis (lat, lon) < node[ans2].dis (lat, lon) ? ans1 : ans2;
-    ll ans3 = ck_block (std :: min (l + 1, MAX_LEN - 1), lat, lon);
-    ans = node[ans].dis (lat, lon) < node[ans3].dis (lat, lon) ? ans : ans3;
     Ans.clear ();
-    Ans.push_back (ans);
-    return ans;
+    ck_block (std :: max (l - 1, 0), lat);
+    if (l) ck_block (l, lat);
+    if (l < MAX_LEN - 1) ck_block (std :: min (l + 1, MAX_LEN - 1), lat);
 }
 
 void blk :: search (double La, double Lo, double Ra, double Ro)

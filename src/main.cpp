@@ -55,7 +55,9 @@ int main (int argc, char *argv[])
         if (std::string (tp) == "neighbour")
         {
             scanf ("%lf%lf", &la, &lo);
-            ll ans = blk::find (la, lo);
+            blk::find (la, lo);
+            blk::near (10, la, lo);
+            ll ans = blk::Ans[0];
             printf ("Finding Point with Id: %lld, dis :%.4lf\n", ans, node[ans].dis (la, lo));
         }
         if (std::string (tp) == "fiter")
@@ -81,6 +83,15 @@ int main (int argc, char *argv[])
         {
             scanf ("%d%d:%d:%d%d:%d:%d", &Id, &h0, &m0, &s0, &h1, &m1, &s1);
             search_taxi (Id, h0 * 3600 + m0 * 60 + s0, h1 * 3600 + m1 * 60 + s1);
+        }
+        if (std::string (tp) == "taxipoint")
+        {
+            scanf ("%lf%lf", &la, &lo);
+            blk::find (la, lo);
+            blk::near (10, la, lo);
+            blk::near_taxi ();
+            ll ans = blk::Ans[0];
+            printf ("Finding Point with Id: %lld, dis :%.4lf\n", ans, node[ans].dis (la, lo));
         }
     }
     return 0;

@@ -79,12 +79,14 @@ namespace blk
 {
     extern double Lat_, Lon_;
     extern std::vector <ll> Ans;
-    ll ck_block (int , double , double );
+    void ck_block (int , double);
     bool cmp (ll, ll);
+    bool cmp_taxi (ll, ll);
     void insert (ll );
     void search (double, double, double, double);
     void fiter (std::string S);
     void list ();
     void near (int , double, double);
-    ll find (double, double);
+    void find (double, double);
+    void near_taxi ();
 }
