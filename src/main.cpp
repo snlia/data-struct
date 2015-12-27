@@ -1,5 +1,6 @@
 #include "common.h"
 #include "Block.h"
+#include "Map.h"
 #include "Tag.h"
 #include "Way.h"
 #include "Node.h"
@@ -10,6 +11,7 @@
 void dijkstra (ll, ll);
 void Astar (ll, ll);
 void spfa (ll, ll);
+void draw_map (int, char **, double, double, double, double);
 
 int main (int argc, char *argv[])
 {
@@ -19,7 +21,7 @@ int main (int argc, char *argv[])
     puts ("Loading ways...");
     load_way ();
     puts ("clear!");
-    ll s, t;
+    ll s = -1, t = -1;
     int x;
     double la, lo, ra, ro;
     char tp [10];
@@ -69,7 +71,8 @@ int main (int argc, char *argv[])
             blk::list ();
         if (std::string (tp) == "map")
         {
-            way.draw_map (argc, argv);
+            scanf ("%lf%lf%lf%lf", &la, &lo, &ra, &ro);
+            Map::draw_map (argc, argv, la, lo, ra, ro, s, t);
         }
     }
     return 0;
