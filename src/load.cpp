@@ -17,7 +17,6 @@ void load_node ()
             fscanf (NODE, "%lld%lf%lf\n", &Id, &lat, &lon);
             now = Id;
             node.add_node (Id, lat, lon);
-            blk::insert (Id);
         }
         else if (tp == '|')
         {
@@ -59,6 +58,6 @@ void load_way ()
         else fgets (value, 50, WAY);
     }
     way.build_road ();
-//    node.cksize ();
+    node.build_block ();
     fclose (WAY);
 }

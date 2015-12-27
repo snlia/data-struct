@@ -1,4 +1,5 @@
 #include "Node.h"
+#include "Block.h"
 Nodes node;
 
 const double Node::EARTH_RADIUS = 6378.137;
@@ -35,6 +36,12 @@ void Nodes :: add_node (ll Id, double lat, double lon)
 {
     node[tot_node] = Node (Id, lat, lon);
     map_node.insert (Id, tot_node); ++tot_node;
+}
+
+void Nodes::build_block ()
+{
+    for (int i = 0; i < tot_node; ++i)
+        blk::insert (node[i].Id);
 }
 
 void Nodes::cksize ()

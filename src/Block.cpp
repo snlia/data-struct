@@ -1,6 +1,9 @@
 #include "Block.h"
 #include "Tag.h"
 
+Block T [MAX_LEN];
+Block T2 [MAX_LEN];
+
 namespace blk{
     std::vector <ll> Ans;
     double Lat_, Lon_;
@@ -15,6 +18,12 @@ void blk :: insert (ll Id)
     Block *p = T + l;
     for (; p->next != NULL && p->rx < lat; p = p->next);
     p->push (Id);
+    if (node[Id].onway)
+    {
+        Block *p = T2 + l;
+        for (; p->next != NULL && p->rx < lat; p = p->next);
+        p->push (Id);
+    }
 }
 
 void blk::fiter (std::string S)
@@ -42,7 +51,7 @@ void blk::list () {for (int i = 0; i < (int) Ans.size (); ++i) printf ("Id :%lld
 
 ll blk :: ck_block (int x, double lat, double lon)
 {
-    Block *p = T + x;
+    Block *p = T2 + x;
     ll Lat = (ll) ((lat + 0.0) * ext);
     Block *pp = p; bool flag = 0;
     for (; p->next != NULL && p->rx < Lat; p = p->next)

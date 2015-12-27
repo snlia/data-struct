@@ -72,7 +72,8 @@ class Block
     Block () {}
 };
 
-static Block T [MAX_LEN];
+extern Block T [MAX_LEN];
+extern Block T2 [MAX_LEN];
 
 namespace blk
 {
