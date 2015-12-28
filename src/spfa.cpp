@@ -3,7 +3,6 @@
 
 void spfa (ll s, ll t)
 {
-    clock_t start = clock();
     std::deque <ll> Q;
     Q.clear ();
     Q.push_back (s);
@@ -43,5 +42,4 @@ void spfa (ll s, ll t)
         }
     }
     printf ("%.7lfm\n", node[t].adj);
-    printf ("using time %.4lf\n", (clock () - start + 0.0) / CLOCKS_PER_SEC);
 }

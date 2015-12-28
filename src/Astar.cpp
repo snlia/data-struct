@@ -6,7 +6,6 @@ static std::priority_queue <pdi, std::vector <pdi>, std::greater <pdi> > Q;
 
 void Astar (ll s, ll t)
 {
-    clock_t start = clock();
     node.reset ();
     node[s].adj = 0;
     while (!Q.empty ()) Q.pop ();
@@ -14,7 +13,7 @@ void Astar (ll s, ll t)
     while (!Q.empty ())
     {
         ll x = Q.top ().second;
-        if (x == t) {printf ("%.7lfm\n", node[t].adj); printf ("using time %.4lf\n", (clock () - start + 0.0) / CLOCKS_PER_SEC); 
+        if (x == t) {printf ("%.7lfm\n", node[t].adj); 
             return ;}
         Q.pop ();
         if (node[x].vis) continue;
